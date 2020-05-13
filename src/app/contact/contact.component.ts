@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from './contact.model';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class ContactComponent implements OnInit {
   contacts: Array<Contact> = [];
   // tslint:disable-next-line:no-inferrable-types
   contactParams: string = '';
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   async ngOnInit() {
     this.loadContacts();
@@ -31,10 +31,10 @@ export class ContactComponent implements OnInit {
   }
 
 
-  async loadItemsFromFile() {
-    const data = await this.http.get('assets/contacts.json').toPromise();
-    return data.json();
-  }
+async loadItemsFromFile() {
+   const data = await this.http.get('assets/contacts.json').toPromise();
+   return data.json();
+ }
 
   addContact() {
     this.contacts.unshift(new Contact({}));
